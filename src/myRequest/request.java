@@ -18,8 +18,8 @@ import com.wrapper.spotify.requests.data.playlists.GetPlaylistRequest;
 
 public class request {
 	
-	private final static String clientID = "";
-	private final static String clientSecret = "";
+	private final static String clientID = "e7e24983cfe34bdead4811e9bf763aae";
+	private final static String clientSecret = "f3cb685d007a48f0a0a055da6ed23c53";
 	private final static URI redirectURI = SpotifyHttpManager.makeUri("https://en.wikipedia.org/wiki/Throbbing_Gristle");
 	
 	private final static SpotifyApi spotifyApi = new SpotifyApi.Builder()
@@ -50,8 +50,6 @@ public class request {
 		    	// Sets access token for client credentials 
 		        ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 		        clientAccessToken = clientCredentials.getAccessToken();
-		    	System.out.println("Authorization through Client Credentials successful.");
-		        System.out.println("Expires in: " + clientCredentials.getExpiresIn());
 		      } catch (Exception e) {
 		    	 System.out.println(e.toString());
 		      }

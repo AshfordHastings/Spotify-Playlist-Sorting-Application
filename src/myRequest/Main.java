@@ -6,17 +6,59 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.application.*;
+import javafx.geometry.Insets;
+import javafx.scene.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.*;
+
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
 
-public class Main {
+public class Main extends Application {
 	
 	private static String playlistId;
 	
 	public static final Scanner kb = new Scanner(System.in);
 	
 	public static void main(String args[]) {
+		
+		launch(args);
+	}
+	@Override
+	public void start(Stage primaryStage) {
+		Color spotifyGreen = new Color(0, 0, 1, 1.0).rgb(30,215,96);
+		Background spotifyBackground = new Background(new BackgroundFill(spotifyGreen, CornerRadii.EMPTY, Insets.EMPTY));
+		Label welcomeLabel1 = new Label("Welcome to the Playlist Sorter.");
+		Label welcomeLabel2 = new Label("This application will output the albums contained in a Spotify playlist to the console, sorted by date.");
+		Label userPromptLabel = new Label("Please enter your playlist ID:");
+		TextField inputField = new TextField();
+		Button nextButton = new Button("next");
+				
+		StackPane pane = new StackPane();
+		pane.setPadding(new Insets(11, 12, 13, 14));
+		pane.setBackground(spotifyBackground);
+		pane.getChildren().addAll(welcomeLabel1, welcomeLabel2, userPromptLabel, inputField, nextButton);
+		
+		Scene scene = new Scene(pane, 400, 450);
+		primaryStage.setTitle("Spotify Playlist Sorter");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		  
+		Button button = new Button("Enter");   
+		
+		
 	    /* Scanner connected to keyboard input, or input file */
 	    
 	    /* Establish connection with Spotify client */

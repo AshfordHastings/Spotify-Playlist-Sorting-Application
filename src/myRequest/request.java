@@ -18,11 +18,11 @@ import com.wrapper.spotify.requests.data.playlists.GetPlaylistRequest;
 
 public class request {
 	
-	private final static String clientID = "7f469b81df4d479995858f2dc6320f0b";
-	private final static String clientSecret = "6da2c6b68a9c4e2c92936175c9c77938";
+	private final static String clientID = "";
+	private final static String clientSecret = "";
 	private final static URI redirectURI = SpotifyHttpManager.makeUri("https://en.wikipedia.org/wiki/Throbbing_Gristle");
 	
-	private static SpotifyApi spotifyApi = new SpotifyApi.Builder()
+	private final static SpotifyApi spotifyApi = new SpotifyApi.Builder()
 	.setClientId(clientID)
 	.setClientSecret(clientSecret)
 	.build();
@@ -41,10 +41,6 @@ public class request {
 	}
 	
 	public static void getClientAuthorization() {
-		spotifyApi = new SpotifyApi.Builder()
-				.setClientId(clientID)
-				.setClientSecret(clientSecret)
-				.build();
 		
 		
 		//Gets an access token from Spotify
@@ -54,11 +50,6 @@ public class request {
 		    	// Sets access token for client credentials 
 		        ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 		        clientAccessToken = clientCredentials.getAccessToken();
-		        
-		        GetPlaylistRequest request = spotifyApi.getPlaylist("3jncPOUbBUYTKd5KHXMeGE").build();
-		        request.execute();
-		        
-		        
 		    	System.out.println("Authorization through Client Credentials successful.");
 		        System.out.println("Expires in: " + clientCredentials.getExpiresIn());
 		      } catch (Exception e) {
@@ -95,10 +86,6 @@ public class request {
 	}
 	
 	public static Playlist getSpotifyPlaylist(String playlistId) throws Exception {
-		spotifyApi = new SpotifyApi.Builder()
-				.setClientId(clientID)
-				.setClientSecret(clientSecret)
-				.build();
 		GetPlaylistRequest playlistRequest = spotifyApi.getPlaylist(playlistId).build();
 		try {
 			Playlist playlist = playlistRequest.execute();
@@ -107,7 +94,6 @@ public class request {
 		catch (Exception e) {
 			e.toString();
 			System.out.println("Exception thrown in getPlaylist.");
-			System.out.println(e.toString());
 			throw new Exception("PlaylistException");
 		}
 		

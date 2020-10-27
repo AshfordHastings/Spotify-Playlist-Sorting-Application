@@ -18,11 +18,11 @@ import com.wrapper.spotify.requests.data.playlists.GetPlaylistRequest;
 
 public class request {
 	
-	private final static String clientID = "";
-	private final static String clientSecret = "";
+	private final static String clientID = "e7e24983cfe34bdead4811e9bf763aae";
+	private final static String clientSecret = "f3cb685d007a48f0a0a055da6ed23c53";
 	private final static URI redirectURI = SpotifyHttpManager.makeUri("https://en.wikipedia.org/wiki/Throbbing_Gristle");
 	
-	private final static SpotifyApi spotifyApi = new SpotifyApi.Builder()
+	private static SpotifyApi spotifyApi = new SpotifyApi.Builder()
 	.setClientId(clientID)
 	.setClientSecret(clientSecret)
 	.build();
@@ -41,6 +41,10 @@ public class request {
 	}
 	
 	public static void getClientAuthorization() {
+		spotifyApi = new SpotifyApi.Builder()
+				.setClientId(clientID)
+				.setClientSecret(clientSecret)
+				.build();
 		
 		
 		//Gets an access token from Spotify
@@ -86,6 +90,10 @@ public class request {
 	}
 	
 	public static Playlist getSpotifyPlaylist(String playlistId) throws Exception {
+		spotifyApi = new SpotifyApi.Builder()
+				.setClientId(clientID)
+				.setClientSecret(clientSecret)
+				.build();
 		GetPlaylistRequest playlistRequest = spotifyApi.getPlaylist(playlistId).build();
 		try {
 			Playlist playlist = playlistRequest.execute();
@@ -94,6 +102,7 @@ public class request {
 		catch (Exception e) {
 			e.toString();
 			System.out.println("Exception thrown in getPlaylist.");
+			System.out.println(e.toString());
 			throw new Exception("PlaylistException");
 		}
 		

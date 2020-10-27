@@ -24,9 +24,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
 
+import com.wrapper.spotify.SpotifyApi;
+import com.wrapper.spotify.SpotifyApi.Builder;
+import com.wrapper.spotify.model_objects.credentials.ClientCredentials;
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
+import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
+import com.wrapper.spotify.requests.data.albums.GetAlbumRequest;
+import com.wrapper.spotify.requests.data.playlists.GetPlaylistRequest;
 
 public class Main extends Application {
 	
@@ -39,11 +45,37 @@ public class Main extends Application {
 	
 	public static void main(String args[]) {
 		
+		SpotifyApi spotifyApi = new SpotifyApi.Builder().
+				setClientId("99a639e0fbac44249faa37cfeb8d0250").
+				setClientSecret("6cf771eed4a047428057edcef8653ce8").
+				build();
+		
+		
+		//Gets an access token from Spotify
+		 ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials()
+				    .build();
+		    try {
+		    	// Sets access token for client credentials 
+		        ClientCredentials clientCredentials = clientCredentialsRequest.execute();
+		        String clientAccessToken = clientCredentials.getAccessToken();
+		        
+		        GetAlbumRequest request = spotifyApi.getAlbum("6Y8lHGQqTmbE6Hhj1mMCkX").build();
+		        request.execute();
+		        
+		        
+		    	System.out.println("Authorization through Client Credentials successful.");
+		        System.out.println("Expires in: " + clientCredentials.getExpiresIn());
+		      } catch (Exception e) {
+		    	 System.out.println(e.toString());
+		      }
+		
+		
+		
 		launch(args);
 	}
 	@Override
 	public void start(Stage primaryStage) {
-		
+	
 		// TODO: Update, rewrite, revariable, and make this all way cleaner.
 		Background spotifyBackground = new Background(new BackgroundFill(spotifyGreen, CornerRadii.EMPTY, Insets.EMPTY));
 

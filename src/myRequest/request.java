@@ -50,6 +50,8 @@ public class request {
 		    	// Sets access token for client credentials 
 		        ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 		        clientAccessToken = clientCredentials.getAccessToken();
+		    	System.out.println("Authorization through Client Credentials successful.");
+		        System.out.println("Expires in: " + clientCredentials.getExpiresIn());
 		      } catch (Exception e) {
 		    	 System.out.println(e.toString());
 		      }

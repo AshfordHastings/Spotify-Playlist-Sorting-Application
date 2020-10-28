@@ -56,14 +56,14 @@ public class SortableAlbum implements Comparable<SortableAlbum> {
 		}
 	}
 	
-	public static SortableAlbum convertToSortableAlbum(PlaylistTrack track) {
+	public static SortableAlbum convertFrom(PlaylistTrack track) {
 		return new SortableAlbum(track);
 	}
 	
 	public static List<SortableAlbum> getAlbumList(List<PlaylistTrack> playlistTracks) {
 		ArrayList<SortableAlbum> albumArray = new ArrayList<>();
 		for(int i = 0; i < playlistTracks.size(); i++) {
-			SortableAlbum albumAtIndex = convertToSortableAlbum(playlistTracks.get(i));
+			SortableAlbum albumAtIndex = convertFrom(playlistTracks.get(i));
 			if(!albumArray.contains(albumAtIndex)) {
 				albumArray.add(albumAtIndex);
 			}
